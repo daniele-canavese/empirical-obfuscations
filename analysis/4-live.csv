@@ -1,0 +1,305 @@
+ID,Period,AppZip,SUCCEEDED,TIME,TIME_IDE,TIME_DBG,TIME_SEARCH,TASK_CLEAR,ENOUGH_TIME,TASK_EASY,IDE,DBG,MAIN_ACTIVITY
+1,2,number-2.3.zip,Yes,65,70,45,5,4,4,3,Xcode,gdb (integrated in IDE),Inspecting the execution by means of the debugger
+1,3,tictactoe-3.4.zip,Yes,50,50,20,5,4,4,4,Xcode,gdb (integrated in IDE),Reading and understanding the source code
+2,2,arithmetic-2.2.zip,No,70,70,60,0,2,4,4,DEV-C++,DEV-C++,Inspecting the execution by means of the debugger
+2,3,tictactoe-3.4.zip,No,68,68,50,5,1,3,4,DEV-C++,DEV-C++,Inspecting the execution by means of the debugger
+3,2,arithmetic-2.4.zip,Yes,35,10,25,0,1,1,2,CLion,integrato,Inspecting the execution by means of the debugger
+3,3,number-3.3.zip,Yes,25,10,15,0,1,1,2,Clion,integrato,Reading and understanding the source code
+4,2,tictactoe-2.4.zip,No,70,20,50,0,1,3,5,CLion,LLdb,Inspecting the execution by means of the debugger
+4,3,number-3.2.zip,Yes,15,3,12,0,1,1,1,CLion,LLdb,Inspecting the execution by means of the debugger
+5,2,tictactoe-2.3.zip,Yes,40,15,25,0,1,1,1,CLion,Integrato,Inspecting the execution by means of the debugger
+5,3,number-3.4.zip,Yes,46,20,25,1/2,2,1,2,CLion,Integrato,Reading and understanding the source code
+6,2,tictactoe-2.2.zip,Yes,35,25,10,0,1,1,1,CLion,MinGW,Reading and understanding the source code
+6,3,number-3.4.zip,Yes,40,20,20,0,1,1,3,CLion,MinGW,Inspecting the execution by means of the debugger
+7,2,number-2.4.zip,Yes,60,10,50,,3,3,3,Xcode,Xcode debugger,Inspecting the execution by means of the debugger
+7,3,tictactoe-3.3.zip,Yes,60,10,60,,3,2,2,Xcode,Xcode debugger,Changing the execution by means of the debugger
+8,2,arithmetic-2.3.zip,No,60,25,35,5,2,4,5,Codeblocks,gdb,Inspecting the execution by means of the debugger
+8,3,tictactoe-3.4.zip,No,70,30,40,,3,5,5,Codeblocks,gdb,Inspecting the execution by means of the debugger
+9,2,arithmetic-2.2.zip,Yes,30,5,25,1,2,1,3,CLion,GDB (integrato clion),Inspecting the execution by means of the debugger
+9,3,tictactoe-3.4.zip,Yes,40,10,30,0,2,1,4,CLion,GDB (integrato in Clion),Reading and understanding the source code
+10,2,tictactoe-2.4.zip,Yes,50,25,35,0,1,1,2,CodeBlock,"gdb, integrated in codeblocks",Inspecting the execution by means of the debugger
+10,3,arithmetic-3.3.zip,Yes,60,20,40,0,1,1,3,CodeBlocks,gdb,Inspecting the execution by means of the debugger
+11,2,tictactoe-2.4.zip,Yes,65,65,60,0,1,2,1,CLion,MingGW-w64 GDB,Reading and understanding the source code
+11,3,arithmetic-3.2.zip,Yes,25,25,20,0,5,1,3,CLion,Mingw-w64 GDB,Inspecting the execution by means of the debugger
+12,2,tictactoe-2.3.zip,Yes,60,10,55,,2,1,3,,gdb,Inspecting the execution by means of the debugger
+12,3,arithmetic-3.4.zip,No,65,,55,,1,3,5,,gdb,Inspecting the execution by means of the debugger
+13,2,tictactoe-2.2.zip,No,70,65,30,5,3,3,4,codeblocks,codeblocks debugger,Inspecting the execution by means of the debugger
+13,3,arithmetic-3.4.zip,No,70,70,30,10,5,5,5,Codeblocks,Codeblocks debugger ,Reading and understanding the source code
+14,2,arithmetic-2.4.zip,No,70,5,65,,4,5,5,code block,gcc,Inspecting the execution by means of the debugger
+14,3,tictactoe-3.3.zip,Yes,60,20,45,0,3,2,3,code block,gcc,Inspecting the execution by means of the debugger
+15,2,arithmetic-2.4.zip,Yes,65,45,20,,2,2,4,CLion,GDB,Reading and understanding the source code
+15,3,tictactoe-3.2.zip,No,70,25,45,,2,4,4,CLion,GDB,Inspecting the execution by means of the debugger
+16,2,number-2.3.zip,No,65,60,50,0,4,2,2,CodeBlocks,GDB,Inspecting the execution by means of the debugger
+16,3,arithmetic-3.4.zip,Yes,50,45,35,0,4,4,3,CodeBlocks,GDB,Inspecting the execution by means of the debugger
+17,2,number-2.2.zip,Yes,65,65,40,2,1,2,4,Xcode,integrated in Xcode,Inspecting the execution by means of the debugger
+17,3,arithmetic-3.4.zip,No,70,70,60,0,1,5,5,Xcode,Integrated,Inspecting the execution by means of the debugger
+18,2,arithmetic-2.4.zip,No,70,35,25,10,1,4,5,CLion,Cygwin,Reading and understanding the source code
+18,3,number-3.3.zip,No,70,45,20,5,1,4,4,CLion,Cygwin,Reading and understanding the source code
+19,2,arithmetic-2.4.zip,No,65,50,15,5,1,4,5,CLion,GDB,Reading and understanding the source code
+19,3,number-3.2.zip,Yes,30,15,13,2,1,1,3,CLion,GDB,Inspecting the execution by means of the debugger
+20,2,arithmetic-2.3.zip,No,60,60,37,,2,4,5,Clion,Bundled LLDB,Inspecting the execution by means of the debugger
+20,3,number-3.4.zip,No,50,50,40,,2,4,4,Clion,Bundled LLDB,Inspecting the execution by means of the debugger
+21,2,arithmetic-2.2.zip,No,70,4,66,0,4,4,4,CLion,integrated,Inspecting the execution by means of the debugger
+21,3,arithmetic-3.2.zip,No,65,15,40,0,2,4,3,CLion,integrated,Inspecting the execution by means of the debugger
+22,2,number-2.4.zip,No,35,,15,5,1,2,4,,gdb (by terminal),Reading and understanding the source code
+22,3,arithmetic-3.3.zip,No,35,,,,3,5,5,,gdb (by terminal),Reading and understanding the source code
+23,2,number-2.4.zip,No,65,47,15,3,2,3,4,XCode,XCode (IDE+debugger),Reading and understanding the source code
+23,3,arithmetic-3.2.zip,No,70,60,10,0,2,3,4,XCode,XCode (IDE + debugger),Reading and understanding the source code
+24,2,number-2.3.zip,Yes,45,30,15,0,5,3,4,codeblocks,GNU GCC,Reading and understanding the source code
+24,3,tictactoe-3.4.zip,Yes,20,20,0,0,1,1,3,code blocks,GNU GCC,Reading and understanding the source code
+25,2,number-2.2.zip,No,30,20,10,0,1,4,4,Clion,GDB debugger,Reading and understanding the source code
+25,3,tictactoe-3.4.zip,No,60,15,40,5,1,3,3,Clion,GDB,Inspecting the execution by means of the debugger
+26,2,tictactoe-2.4.zip,Yes,58,5,52,1,1,2,3,CodeBlocks,gcc (in IDE),Inspecting the execution by means of the debugger
+26,3,number-3.3.zip,Yes,24,2,22,0,1,1,2,CodeBlocks,gcc (in IDE),Inspecting the execution by means of the debugger
+27,2,number-2.4.zip,Yes,69,69,65,0,1,2,3,codeblocks,gdb,Inspecting the execution by means of the debugger
+27,3,number-3.2.zip,Yes,27,27,23,0,1,1,1,codeblocks,gdb,Inspecting the execution by means of the debugger
+28,2,tictactoe-2.3.zip,Yes,70,5,65,0,1,1,3,CLion,LLDB embedded in CLION,Inspecting the execution by means of the debugger
+28,3,number-3.4.zip,No,70,5,65,0,1,4,4,CLion,LLDB embedded in CLion,Inspecting the execution by means of the debugger
+29,2,tictactoe-2.2.zip,Yes,70,50,20,0,4,4,3,CodeBlocks,GCC,Reading and understanding the source code
+29,3,number-3.4.zip,No,50,40,10,0,2,4,2,Codeblocks,Debugger integrato a codeblocks,Reading and understanding the source code
+30,2,number-2.4.zip,Yes,60,15,40,5,2,3,2,CLion,Bundled GDB,Inspecting the execution by means of the debugger
+30,3,tictactoe-3.3.zip,Yes,60,15,45,0,2,2,3,CLion,Bundled GDB,Inspecting the execution by means of the debugger
+31,2,number-2.4.zip,Yes,30,5,25,0,1,1,1,Visual Studio Code,GDB,Inspecting the execution by means of the debugger
+31,3,tictactoe-3.2.zip,Yes,25,5,20,0,1,1,1,Visual Studio Code,GDB,Inspecting the execution by means of the debugger
+32,2,arithmetic-2.3.zip,Yes,15,2,13,0,1,1,2,Codeblocks,Codeblocks,Inspecting the execution by means of the debugger
+32,3,tictactoe-3.4.zip,Yes,60,,60,0,1,3,5,Codeblocks,Codeblocks,Inspecting the execution by means of the debugger
+33,2,arithmetic-2.2.zip,Yes,12,3,9,0,1,1,1,Visual Studio 2019,Local Windows Debugger (integrated in VS),Inspecting the execution by means of the debugger
+33,3,tictactoe-3.4.zip,Yes,48,10,38,0,1,1,3,Visual Studio 2019,Local Windows debugger (integrated in VS),Inspecting the execution by means of the debugger
+34,2,tictactoe-2.4.zip,Yes,65,10,55,1 (ASCII code),4,3,4,Jetbrians CLion,GDB inside IDE,Inspecting the execution by means of the debugger
+34,3,arithmetic-3.3.zip,Yes,28,14,14,,1,1,1,Jetbrians CLion,GDB inside IDE,Inspecting the execution by means of the debugger
+35,2,tictactoe-2.4.zip,Yes,70,10,60,0,1,2,2,dev c++,50,Inspecting the execution by means of the debugger
+35,3,arithmetic-3.2.zip,Yes,70,5,65,5,1,2,1,devc++,30,Inspecting the execution by means of the debugger
+36,2,tictactoe-2.3.zip,Yes,40,10,30,0,1,1,2,CLion,Cygwin GDB,Inspecting the execution by means of the debugger
+36,3,arithmetic-3.4.zip,Yes,20,5,10,5,1,1,3,CLion,Cygwin GDB,Inspecting the execution by means of the debugger
+37,2,tictactoe-2.2.zip,Yes,60,15,45,,2,1,3,clion,Cygwin64,Changing the execution by means of the debugger
+37,3,arithmetic-3.4.zip,No,65,15,50,,2,2,5,clion,cygwin64,Inspecting the execution by means of the debugger
+38,2,arithmetic-2.4.zip,No,65,20,45,0,3,4,5,dev-c++,gdb,Inspecting the execution by means of the debugger
+38,3,tictactoe-3.3.zip,Yes,35,10,25,0,1,1,2,dev-c++,gdb,Inspecting the execution by means of the debugger
+39,2,arithmetic-2.4.zip,Yes,65,10,55,0,1,2,4,CodeBlocks,GDB,Inspecting the execution by means of the debugger
+39,3,tictactoe-3.2.zip,No,70,5,65,0,1,3,4,CodeBlocks,GDB,Changing the execution by means of the debugger
+40,2,number-2.3.zip,Yes,55,55,45,0,1,2,4,Dev-C++,TDM-GCC ,Inspecting the execution by means of the debugger
+40,3,arithmetic-3.4.zip,No,50,15,35,0,1,5,5,Dev C++,GCC,Inspecting the execution by means of the debugger
+41,2,number-2.2.zip,Yes,40,10,30,,1,1,3,CodeBlocks,gdb,Inspecting the execution by means of the debugger
+41,3,arithmetic-3.4.zip,No,70,15,55,,1,3,5,CodeBlocks,gdb,Inspecting the execution by means of the debugger
+42,2,arithmetic-2.4.zip,Yes,70,20,50,,1,3,4,CLion,Integrated CLion,Reading and understanding the source code
+42,3,number-3.3.zip,Yes,40,25,15,,1,1,1,CLion,Integrated CLion,Reading and understanding the source code
+43,2,arithmetic-2.4.zip,No,70,70,70,0,2,5,1,Clio,,Inspecting the execution by means of the debugger
+43,3,arithmetic-3.2.zip,Yes,15,15,10,0,1,1,1,Clion,,Inspecting the execution by means of the debugger
+44,2,arithmetic-2.3.zip,Yes,65,55,10,,1,2,2,Visual Studio 2015,Local Windows Debugger,Inspecting the execution by means of the debugger
+44,3,number-3.4.zip,Yes,55,45,5,5,1,1,1,Visual Studio 2015,Local Windows Debugger,Inspecting the execution by means of the debugger
+45,2,arithmetic-2.2.zip,No,70,10,60,0,1,2,5,CLion,CLion integrated debugger,Inspecting the execution by means of the debugger
+45,3,number-3.4.zip,No,70,5,65,0,1,3,5,CLion,Integrated Clion debugger + gdb (IMPORTANT NOTE: I used gdb also for the other 2 tasks but I forgot to mention it!),Inspecting the execution by means of the debugger
+46,2,number-2.4.zip,Yes,70,60,10,,1,3,5,Visual Studio,debugger integrated in Visual Studio,Reading and understanding the source code
+46,3,arithmetic-3.3.zip,No,70,60,10,,1,4,5,Visual Studio,integrated debugger in Visual Studio,Reading and understanding the source code
+47,2,number-2.4.zip,No,70,40,35,0,3,3,4,CodeBlocks,gdb,Inspecting the execution by means of the debugger
+47,3,arithmetic-3.2.zip,Yes,12,3,6,0,1,1,1,CodeBlocks,gdb (integrato in codeblocks),Inspecting the execution by means of the debugger
+48,2,number-2.3.zip,No,70,30,30,10,4,3,3,Clion,CMake con MinGW,Changing the execution by means of the debugger
+48,3,tictactoe-3.4.zip,No,70,40,40,10,3,2,2,CLion,CMake MinGW,Inspecting the execution by means of the debugger
+49,2,number-2.2.zip,No,70,10,50,10,5,5,4,visualStudio2015,LocalWindowsDebugger,Reading and understanding the source code
+49,3,tictactoe-3.4.zip,No,70,10,60,0,5,5,4,VisualStudio2015,LocalWindowsDebugger,Reading and understanding the source code
+50,2,tictactoe-2.4.zip,Yes,35,5,30,0,2,1,2,CodeBlocks,CodeBlocks,Inspecting the execution by means of the debugger
+50,3,number-3.3.zip,Yes,45,5,40,0,1,1,2,CodeBlocks,CodeBlocks,Inspecting the execution by means of the debugger
+51,2,tictactoe-2.4.zip,Yes,30,5,30,0,1,1,2,Visual Studio 2019,Integrated in IDE,Inspecting the execution by means of the debugger
+51,3,number-3.2.zip,Yes,17,5,11,1,1,1,1,Visual Studio 2019,Integrated in IDE,Inspecting the execution by means of the debugger
+52,2,tictactoe-2.3.zip,Yes,34,34,30,0,1,1,2,Codeblocks + vscode,gdb,Inspecting the execution by means of the debugger
+52,3,number-3.4.zip,Yes,5,6,,0,1,1,1,Codeblocks + vscode,,Reading and understanding the source code
+53,2,tictactoe-2.2.zip,Yes,40,20,20,0,1,1,1,CLion,GDB in Clion,Reading and understanding the source code
+53,3,number-3.4.zip,No,70,30,40,0,1,4,5,Clion,GDB in CLion,Inspecting the execution by means of the debugger
+54,2,number-2.4.zip,No,70,7,63,0,1,3,3,clion,clion,Inspecting the execution by means of the debugger
+54,3,tictactoe-3.3.zip,Yes,65,13,52,0,1,2,2,Clion,clion,Changing the execution by means of the debugger
+55,2,number-2.4.zip,Yes,25,5,18,2,5,5,3,CodeBlocks,GDB (integrated in codeblocks),Inspecting the execution by means of the debugger
+55,3,tictactoe-3.2.zip,No,35,5,30,0,2,3,4,Codeblocks,GDB (integrated with codeblocks),Inspecting the execution by means of the debugger
+56,2,arithmetic-2.3.zip,Yes,70,8,60,2,1,2,3,Codeblocks,debug integrato in Codeblock,Inspecting the execution by means of the debugger
+56,3,tictactoe-3.4.zip,Yes,64,10,54,,1,1,3,Codeblocks,Debugger integrato in codeblock,Inspecting the execution by means of the debugger
+57,2,arithmetic-2.2.zip,No,40,10,30,0,2,4,3,Codeblocks,GDB,Changing the execution by means of the debugger
+57,3,tictactoe-3.4.zip,No,65,20,45,0,4,3,3,Codeblocks,GDB,Changing the execution by means of the debugger
+58,2,tictactoe-2.4.zip,Yes,45,35,10,0,2,2,3,Visual Studio 2015,Visual Studio,Reading and understanding the source code
+58,3,arithmetic-3.2.zip,Yes,20,7,10,2,2,1,3,Visual Studio 2015,Visual Studio,Inspecting the execution by means of the debugger
+59,2,tictactoe-2.3.zip,Yes,55,30,30,,5,5,3,CodeBloks,Integrated in CodeBlocks,Inspecting the execution by means of the debugger
+59,3,arithmetic-3.4.zip,No,50,30,20,,1,3,5,CodeBlocks,Integrated in CodeBlocks,Reading and understanding the source code
+60,2,tictactoe-2.2.zip,Yes,70,35,35,0,4,5,3,CLion,Integrato (MinGW),Inspecting the execution by means of the debugger
+60,3,arithmetic-3.4.zip,No,70,40,30,0,5,3,5,CLion,Integrato (MinGW),Reading and understanding the source code
+61,2,arithmetic-2.4.zip,No,70,50,20,0,1,3,5,CLion,integrato in Clion,Reading and understanding the source code
+61,3,tictactoe-3.3.zip,Yes,19,14,5,,3,2,2,Clion,integrato in Clion,Reading and understanding the source code
+62,2,arithmetic-2.4.zip,No,70,20,50,,2,5,5,CLion,integrato,Inspecting the execution by means of the debugger
+62,3,tictactoe-3.2.zip,Yes,50,10,50,,3,2,4,CLion,integrato,Inspecting the execution by means of the debugger
+63,2,number-2.3.zip,No,50,10,37,3,2,2,3,VisualStudio2019,,Inspecting the execution by means of the debugger
+63,3,arithmetic-3.4.zip,No,70,15,55,,4,3,5,VisualStudio2019,,Inspecting the execution by means of the debugger
+64,2,number-2.2.zip,Yes,40,10,30,0,1,1,3,Clion,Debugger integrato in Clion,Inspecting the execution by means of the debugger
+64,3,arithmetic-3.4.zip,No,70,20,50,0,2,5,5,Clion,Debugger integrato in Clion,Inspecting the execution by means of the debugger
+65,2,arithmetic-2.4.zip,Yes,30,5,25,,2,2,4,CLion,gdb,Inspecting the execution by means of the debugger
+65,3,number-3.3.zip,Yes,20,20,15,,3,1,4,CLion,gdb,Inspecting the execution by means of the debugger
+66,2,arithmetic-2.4.zip,No,60,20,40,,4,2,2,CLion,gdb,Inspecting the execution by means of the debugger
+66,3,number-3.2.zip,Yes,15,10,5,,4,5,5,CLion,gbd,Reading and understanding the source code
+67,2,arithmetic-2.3.zip,Yes,17,15,14,0,1,1,2,Xcode,Xcode default (gdb),Inspecting the execution by means of the debugger
+67,3,number-3.4.zip,Yes,5,5,5,0,1,1,2,Xcode,Xcode default (gdb),Changing the execution by means of the debugger
+68,2,arithmetic-2.2.zip,Yes,28,5,20,3,1,1,2,Dev C++,TDM-GCC 4.9.2 64 bit,Inspecting the execution by means of the debugger
+68,3,arithmetic-3.4.zip,Yes,37,10,27,0,1,1,2,Dev C++,TDM-GCC 4.9.2,Inspecting the execution by means of the debugger
+69,2,number-2.4.zip,Yes,20,20,15,0,3,3,3,codeblocks,si,Inspecting the execution by means of the debugger
+69,3,arithmetic-3.3.zip,Yes,20,20,15,,2,3,2,codeblock,si,Inspecting the execution by means of the debugger
+70,2,number-2.4.zip,Yes,30,20,10,0,3,3,3,CodeBlocks,gdb,Inspecting the execution by means of the debugger
+70,3,arithmetic-3.2.zip,Yes,40,40,30,0,3,3,3,CodeBlocks,gbd,Inspecting the execution by means of the debugger
+71,2,number-2.3.zip,No,70,70,,,1,3,3,codebjocks,,Inspecting the execution by means of the debugger
+71,3,tictactoe-3.4.zip,No,65,65,,,1,2,5,codeblocks,,Inspecting the execution by means of the debugger
+72,2,number-2.2.zip,Yes,25,5,20,,1,1,2,Code::Blocks 17.12,gdb integrated in Code::Blocks,Changing the execution by means of the debugger
+72,3,tictactoe-3.4.zip,Yes,55,15,45,,3,3,4,Code::Blocks 17.12,gdb integrated in Code:Blocks,Inspecting the execution by means of the debugger
+73,2,tictactoe-2.4.zip,Yes,54,50,35,,1,1,1,Code::Blocks,gdb,Changing the execution by means of the debugger
+73,3,number-3.3.zip,Yes,20,18,15,,1,1,1,Code::Blocks,gdb,Changing the execution by means of the debugger
+74,2,tictactoe-2.4.zip,Yes,65,35,30,0,5,5,3,cLion,LLDB 9.0,Inspecting the execution by means of the debugger
+74,3,number-3.2.zip,Yes,30,15,15,0,5,5,5,cLion,LLDB 9.0,Inspecting the execution by means of the debugger
+75,2,tictactoe-2.3.zip,Yes,65,65,50,0,1,2,2,clion,clion debug,Inspecting the execution by means of the debugger
+75,3,number-3.4.zip,Yes,27,26,23,0,1,2,2,clion,clion debugger,Inspecting the execution by means of the debugger
+76,2,tictactoe-2.2.zip,Yes,40,5,35,0,2,2,3,CLion,GDB inside CLion,Inspecting the execution by means of the debugger
+76,3,number-3.4.zip,Yes,45,3,42,0,1,2,2,CLion,GDB inside CLion,Inspecting the execution by means of the debugger
+77,2,number-2.4.zip,No,70,45,20,0,2,2,2,CodeBlocks,GDB through IDE,Reading and understanding the source code
+77,3,tictactoe-3.3.zip,Yes,34,15,15,0,4,5,4,CodeBlocks,GDB through IDE,Inspecting the execution by means of the debugger
+78,2,number-2.4.zip,No,70,40,20,10,2,2,4,VScode & gcc,gdb with vscode,Inspecting the execution by means of the debugger
+78,3,tictactoe-3.2.zip,Yes,65,15,50,0,1,1,2,VSCode con gcc,gdb su VSCode,Inspecting the execution by means of the debugger
+79,2,arithmetic-2.3.zip,Yes,40,10,30,,1,3,3,CLion,CLion Integrated Debugger,Inspecting the execution by means of the debugger
+79,3,tictactoe-3.4.zip,Yes,60,15,45,,3,3,3,CLion,CLion Integrated Debugger,Inspecting the execution by means of the debugger
+80,2,arithmetic-2.2.zip,Yes,15,3,12,0,2,1,1,clion,Debug integrato nel IDE,Inspecting the execution by means of the debugger
+80,3,tictactoe-3.4.zip,Yes,35,4,30,1,1,1,3,clion,clion debugger,Inspecting the execution by means of the debugger
+81,2,tictactoe-2.4.zip,No,70,10,60,0,1,1,1,visual studio,Visual Studio,Inspecting the execution by means of the debugger
+81,3,arithmetic-3.3.zip,No,70,12,58,0,1,2,2,Visual Studio,Visual Studio,Inspecting the execution by means of the debugger
+82,2,tictactoe-2.4.zip,No,70,40,,0,1,2,2,Visual Studio Code,lldb,Inspecting the execution by means of the debugger
+82,3,arithmetic-3.2.zip,No,70,35,30,5,2,1,3,Visual Studio Code,lldb,Inspecting the execution by means of the debugger
+83,2,tictactoe-2.3.zip,No,70,60,30,2,2,3,3,Code:Blocks,60,Inspecting the execution by means of the debugger
+83,3,arithmetic-3.4.zip,Yes,40,10,10,0,2,2,2,Code::Block 13.12,20,Reading and understanding the source code
+84,2,tictactoe-2.2.zip,Yes,58,56,0,2,4,2,4,IntelliJClion,GDB,Reading and understanding the source code
+84,3,arithmetic-3.4.zip,Yes,23,8,15,0,2,2,1,IntelliJclion,GDB,Inspecting the execution by means of the debugger
+85,2,arithmetic-2.4.zip,Yes,65,65,55,10,5,4,3,Visual Studio 2019,Visual Studio 2019,Inspecting the execution by means of the debugger
+85,3,tictactoe-3.3.zip,Yes,60,25,30,5,5,5,3,Visual Studio 2019,Visual Studio 2019,Inspecting the execution by means of the debugger
+86,2,arithmetic-2.4.zip,Yes,70,5,60,5,3,2,1,Code::Blocks,GDB,Inspecting the execution by means of the debugger
+86,3,tictactoe-3.2.zip,Yes,70,2,65,3,1,3,3,Code::Blocks,GDB,Inspecting the execution by means of the debugger
+87,2,number-2.2.zip,Yes,40,20,50,,1,1,2,Visual Studio 2019,Visual Studio debugger,Inspecting the execution by means of the debugger
+87,3,arithmetic-3.4.zip,No,70,10,60,,2,2,4,Visual Studio 2019,Visual Studio debugger,Inspecting the execution by means of the debugger
+88,2,arithmetic-2.4.zip,No,70,20,50,,3,3,4,Clion,gdb,Inspecting the execution by means of the debugger
+88,3,number-3.3.zip,No,70,20,50,,3,3,4,Clion,gdb,Inspecting the execution by means of the debugger
+89,2,arithmetic-2.4.zip,No,70,70,60,,3,4,5,CLion,CLion Debugger,Inspecting the execution by means of the debugger
+89,3,number-3.2.zip,Yes,33,30,20,1,1,1,3,CLion,CLion Debugger,Inspecting the execution by means of the debugger
+90,2,arithmetic-2.3.zip,Yes,50,50 min,50 min,0 min,1,1,4,Clion,LLDB,Inspecting the execution by means of the debugger
+90,3,number-3.4.zip,Yes,25,10,25,0,1,1,1,Clion,LLDB,Inspecting the execution by means of the debugger
+91,2,arithmetic-2.2.zip,Yes,30,5,25,,5,5,4,Xcode,lldb,Inspecting the execution by means of the debugger
+91,3,number-3.4.zip,Yes,35,10,23,2,1,1,2,xcode,lldb,Inspecting the execution by means of the debugger
+92,2,number-2.4.zip,Yes,55,55,40,0,1,1,3,CodeBlocks,yes,Inspecting the execution by means of the debugger
+92,3,arithmetic-3.3.zip,Yes,40,40,35,5,1,1,1,CodeBlocks,yes,Inspecting the execution by means of the debugger
+93,2,number-2.4.zip,Yes,55,55,50,1,1,2,3,Visual Studio 2019,VS Debugger,Inspecting the execution by means of the debugger
+93,3,arithmetic-3.2.zip,Yes,30,10,20,,1,1,2,Visual Studio 2019,VS Debugger,Inspecting the execution by means of the debugger
+94,2,number-2.3.zip,Yes,40,40,40,10,1,3,4,Clion,gdb,Reading and understanding the source code
+94,3,tictactoe-3.4.zip,No,55,55,40,0,4,3,5,Clion,gdb,Inspecting the execution by means of the debugger
+95,2,number-2.2.zip,No,70,20,50,0,4,3,2,Eclipse,gdb,Inspecting the execution by means of the debugger
+95,3,tictactoe-3.4.zip,No,70,20,50,0,4,2,2,CodeLite,gdb,Inspecting the execution by means of the debugger
+96,2,tictactoe-2.4.zip,Yes,45,40,30,0,1,3,4,clion,integrated in c lion,Inspecting the execution by means of the debugger
+96,3,number-3.3.zip,Yes,20,20,5,0,1,1,2,clion,integrated gdb,Reading and understanding the source code
+97,2,tictactoe-2.4.zip,No,40,20,20,,2,2,1,CodeBlocks,gdb,Reading and understanding the source code
+97,3,number-3.2.zip,Yes,50,10,40,,4,4,3,CodeBlocks,gdb,Inspecting the execution by means of the debugger
+98,2,tictactoe-2.2.zip,Yes,65,7,58,,2,3,3,CLion,GDB,Inspecting the execution by means of the debugger
+98,3,number-3.4.zip,Yes,45,5,40,0,2,1,2,CLion,GDB,Inspecting the execution by means of the debugger
+99,2,number-2.4.zip,Yes,40,10,30,0,2,1,2,Clion,gcc,Inspecting the execution by means of the debugger
+99,3,tictactoe-3.3.zip,Yes,50,20,30,0,2,2,3,Clion,gdb,Inspecting the execution by means of the debugger
+100,2,number-2.4.zip,Yes,24,25,25,,1,1,3,Code Blocks,gdb,Inspecting the execution by means of the debugger
+100,3,tictactoe-3.2.zip,No,70,50,20,,2,2,5,Code Blocks,gdb,Reading and understanding the source code
+101,2,arithmetic-2.3.zip,Yes,25,12,12,0,3,4,3,clion,gdb,Inspecting the execution by means of the debugger
+101,3,tictactoe-3.4.zip,Yes,65,25,25,10,3,2,1,clion,gdb,Inspecting the execution by means of the debugger
+102,2,arithmetic-2.2.zip,Yes,50,50,45,0,1,1,1,Code Blocks,Gdb,Inspecting the execution by means of the debugger
+102,3,tictactoe-3.4.zip,Yes,70,5,45,0,1,1,2,Code Blocks,gdb,Inspecting the execution by means of the debugger
+103,2,tictactoe-2.4.zip,No,50,50,40,0,1,2,3,codeblocks,gdb,Inspecting the execution by means of the debugger
+103,3,arithmetic-3.3.zip,No,70,30,40,0,1,2,4,codeblocks,gdb,Inspecting the execution by means of the debugger
+104,2,tictactoe-2.4.zip,No,60,60,60,0,1,3,4,Clion,cygwin,Inspecting the execution by means of the debugger
+104,3,arithmetic-3.2.zip,Yes,27,10,17,0,1,1,3,Clion,cygwin,Inspecting the execution by means of the debugger
+105,2,tictactoe-2.3.zip,Yes,70,70,60,0,1,3,3,CodeBlocks,GCC GNU,Inspecting the execution by means of the debugger
+105,3,arithmetic-3.4.zip,No,70,2,68,0,1,3,5,Codeblocks,GNU GCC,Inspecting the execution by means of the debugger
+106,2,tictactoe-2.2.zip,Yes,56,23,30,3,1,1,2,VisualStudio code,gdb,Inspecting the execution by means of the debugger
+106,3,arithmetic-3.4.zip,No,70,60,5,5,2,4,4,Visual Studio code,gdb,Reading and understanding the source code
+107,2,arithmetic-2.4.zip,No,70,40,30,0,2,4,5,CLion,CLion,Reading and understanding the source code
+107,3,tictactoe-3.3.zip,Yes,70,60,10,0,1,1,3,CLion,CLion,Reading and understanding the source code
+108,2,arithmetic-2.4.zip,No,70,30,40,0,2,5,5,vscode,vscode,Inspecting the execution by means of the debugger
+108,3,tictactoe-3.2.zip,No,70,35,35,,1,1,3,vscode,vscode,Inspecting the execution by means of the debugger
+109,2,number-2.3.zip,No,60,60,55,,4,2,1,Vs code,gdb,Reading and understanding the source code
+109,3,arithmetic-3.4.zip,No,65,10,60,,5,2,1,VsCode,GDB,Inspecting the execution by means of the debugger
+110,2,number-2.2.zip,Yes,45,40,,5,1,1,2,CodeBlocks,,Changing the execution by means of the debugger
+110,3,arithmetic-3.4.zip,Yes,25,5,20,,1,2,1,CodeBlocks,GDB,Changing the execution by means of the debugger
+111,2,arithmetic-2.4.zip,Yes,35,15,20,0,1,1,2,Clion,GDB,Inspecting the execution by means of the debugger
+111,3,number-3.3.zip,Yes,30,10,20,0,1,1,1,Clion,GDB,Inspecting the execution by means of the debugger
+112,2,arithmetic-2.4.zip,No,70,70,60,0,2,3,4,DEV-C++,TDM-GCC 4.9.2 64 bit Debug,Inspecting the execution by means of the debugger
+112,3,number-3.2.zip,Yes,50,10,35,5,2,1,2,DEV-C++,TDM-GCC 4.9.2 64 bit Debug,Inspecting the execution by means of the debugger
+113,2,arithmetic-2.3.zip,No,70,60,10,0,4,2,4,,,Reading and understanding the source code
+113,3,number-3.4.zip,No,60,40,20,0,4,3,4,,gdb,Reading and understanding the source code
+114,2,arithmetic-2.2.zip,Yes,40,40,40,0,1,1,2,CLION,GDB,Inspecting the execution by means of the debugger
+114,3,number-3.4.zip,Yes,30,15,35,0,1,1,2,CLION,GDB,Inspecting the execution by means of the debugger
+115,2,number-2.4.zip,No,60,50,40,,2,3,4,CLion,CLion,Inspecting the execution by means of the debugger
+115,3,arithmetic-3.3.zip,No,70,70,55,,2,4,4,CLion,CLion,Inspecting the execution by means of the debugger
+116,2,number-2.4.zip,Yes,60,60,45,1,1,3,3,Clion,GDB,Inspecting the execution by means of the debugger
+116,3,arithmetic-3.2.zip,Yes,30,5,25,0,1,1,2,Clion,GDB,Inspecting the execution by means of the debugger
+117,2,number-2.3.zip,No,50,,30,0,2,2,3,,20,Reading and understanding the source code
+117,3,tictactoe-3.4.zip,Yes,60,40,30,0,2,4,3,VisualStudioCode,gdb,Inspecting the execution by means of the debugger
+118,2,number-2.2.zip,Yes,40,10,30,,1,1,3,Code::Blocks,GDB,Inspecting the execution by means of the debugger
+118,3,tictactoe-3.4.zip,Yes,50,20,30,,1,1,3,Code::Blocks,GDB,Inspecting the execution by means of the debugger
+119,2,tictactoe-2.4.zip,Yes,40,5,35,0,1,1,2,CodeBlocks,MinGW32 gdb,Inspecting the execution by means of the debugger
+119,3,number-3.3.zip,Yes,35,5,30,3,1,1,3,CodeBlocks,MinGW32 gdb,Inspecting the execution by means of the debugger
+120,2,tictactoe-2.4.zip,Yes,55,55,48,,1,1,3,Code::Blocks 16.01,GDB (inside the ide),Inspecting the execution by means of the debugger
+120,3,number-3.2.zip,Yes,23,23,16,,1,1,1,Code::Blocks 16.01,GDB (inside the ide),Inspecting the execution by means of the debugger
+121,2,tictactoe-2.3.zip,Yes,40,40,35,0,1,1,3,Clion,bundled gdb,Inspecting the execution by means of the debugger
+121,3,number-3.4.zip,Yes,65,25,40,0,1,2,4,Clion,bundled gdb,Inspecting the execution by means of the debugger
+122,2,tictactoe-2.2.zip,Yes,60,25,35,2,1,2,3,CLion,gdb,Reading and understanding the source code
+122,3,number-3.4.zip,No,70,25,40,5,1,3,3,CLion,gdb,Inspecting the execution by means of the debugger
+123,2,number-2.4.zip,Yes,39,35,25,4,1,1,2,clion,clion debug,Inspecting the execution by means of the debugger
+123,3,tictactoe-3.3.zip,Yes,70,60,45,0,1,1,2,clion,clion debugger,Reading and understanding the source code
+124,2,number-2.4.zip,Yes,40,40,35,,1,1,2,Code::Block,MinGW,Inspecting the execution by means of the debugger
+124,3,tictactoe-3.2.zip,Yes,50,50,40,,1,1,2,Code::Blocks,MinGW,Changing the execution by means of the debugger
+125,2,arithmetic-2.3.zip,Yes,45,tutto il tempo,tutto il tempo,,3,3,3,Clion,LLDB,Inspecting the execution by means of the debugger
+125,3,tictactoe-3.4.zip,No,60,15,45,,4,5,2,Clion,DDLB,Inspecting the execution by means of the debugger
+126,2,arithmetic-2.2.zip,Yes,70,30,30,0,1,1,1,VISUAL STUDIO 2015,VISUAL STUDIO 2015,Inspecting the execution by means of the debugger
+126,3,tictactoe-3.4.zip,No,70,35,35,0,1,3,4,visual studio 2015,visual studio 2015,Inspecting the execution by means of the debugger
+127,2,tictactoe-2.4.zip,Yes,45,45,30,0,4,5,4,clion,clion,Inspecting the execution by means of the debugger
+127,3,arithmetic-3.3.zip,Yes,50,10,40,0,4,5,4,clion,clion,Inspecting the execution by means of the debugger
+128,2,tictactoe-2.4.zip,Yes,30,20,,,3,5,1,Visual studio 2008,,Reading and understanding the source code
+128,3,arithmetic-3.2.zip,Yes,37,15,22,0,5,5,5,Visual studio 2008,Debugger WIndows locale (default),Inspecting the execution by means of the debugger
+129,2,tictactoe-2.3.zip,Yes,48,54,40,0,1,2,4,CLION,GDB,Inspecting the execution by means of the debugger
+129,3,arithmetic-3.4.zip,Yes,35,44,35,0,1,1,2,CLION,GDB,Inspecting the execution by means of the debugger
+130,2,tictactoe-2.2.zip,No,70,15,50,5,2,4,4,CodeBlocks,GDB,Reading and understanding the source code
+130,3,arithmetic-3.4.zip,No,70,15,50,5,2,5,5,CodeBlocks,GDB,Inspecting the execution by means of the debugger
+131,2,arithmetic-2.4.zip,No,70,70,70,0,5,1,3,CLion,,Inspecting the execution by means of the debugger
+131,3,tictactoe-3.3.zip,Yes,15,20,,,1,1,1,CLion,,Reading and understanding the source code
+132,2,arithmetic-2.4.zip,Yes,30,30,25,0,2,2,2,CLION,GDB,Inspecting the execution by means of the debugger
+132,3,tictactoe-3.2.zip,Yes,60,20,40,0,2,3,3,CLION,GDB,Inspecting the execution by means of the debugger
+133,2,number-2.3.zip,Yes,40,10,30,1,2,1,3,Codeblocks,GCB,Inspecting the execution by means of the debugger
+133,3,arithmetic-3.4.zip,No,70,20,50,,2,3,3,Codeblocks,GBD,Inspecting the execution by means of the debugger
+134,2,number-2.2.zip,Yes,40,40,40,0,1,1,1,Visual Studio 2017,Visual Studio 2017,Inspecting the execution by means of the debugger
+134,3,arithmetic-3.4.zip,Yes,30,5,20,5,3,1,1,Visual Studio 2017,Visual Studio 2017,Inspecting the execution by means of the debugger
+135,2,arithmetic-2.4.zip,No,70,70,60,5,1,4,4,CLion,GDB,Inspecting the execution by means of the debugger
+135,3,number-3.3.zip,Yes,30,10,20,0,1,1,3,CLion,GDB,Inspecting the execution by means of the debugger
+136,2,arithmetic-2.4.zip,No,40,40,40,0,3,3,3,Clion,LLDB,Inspecting the execution by means of the debugger
+136,3,number-3.2.zip,No,60,60,60,0,4,4,4,Clion,LLDB,Changing the execution by means of the debugger
+137,2,arithmetic-2.3.zip,Yes,28,28,circa 20,0,1,1,3,Xcode,Xcode integrato,Inspecting the execution by means of the debugger
+137,3,number-3.4.zip,Yes,13,12,10,0,1,1,3,Xcode,Xcode integrato,Inspecting the execution by means of the debugger
+138,2,arithmetic-2.2.zip,Yes,40,40,30,5,2,1,2,CodeBlocks,gdb,Inspecting the execution by means of the debugger
+138,3,number-3.4.zip,Yes,50,20,30,,2,1,2,CodeBlocks,gdb,Inspecting the execution by means of the debugger
+139,2,number-2.4.zip,No,70,60,15,10,2,4,5,CodeBlocks,GDB,Reading and understanding the source code
+139,3,arithmetic-3.3.zip,Yes,27,27,15,0,4,5,4,CodeBlocks,GDB,Inspecting the execution by means of the debugger
+140,2,number-2.4.zip,No,70,70,,,2,4,5,Clion 2019.1.4,Clion 2019.1.4,Reading and understanding the source code
+140,3,arithmetic-3.2.zip,Yes,18,18,,,1,1,1,Clion 2019.1.4,Clion 2019.1.4,Reading and understanding the source code
+141,2,number-2.3.zip,Yes,30,30,20,2,1,1,3,CLion,GDB,Inspecting the execution by means of the debugger
+141,3,tictactoe-3.4.zip,No,70,70,30,0,1,2,4,CLion,GDB,Reading and understanding the source code
+142,2,tictactoe-2.4.zip,No,70,25,40,5,3,3,2,clion,clion debugger,Inspecting the execution by means of the debugger
+142,3,number-3.2.zip,Yes,60,10,50,0,4,4,3,clion,clion debugger,Inspecting the execution by means of the debugger
+143,2,tictactoe-2.2.zip,Yes,40,30,25,,1,2,3,CodeBlocks,GDB/CDB,Inspecting the execution by means of the debugger
+143,3,number-3.4.zip,No,70,70,60,,1,5,5,CodeBlocks,GDB,Changing the execution by means of the debugger
+144,2,number-2.4.zip,No,70,10,57,3,4,3,2,,gdb,Inspecting the execution by means of the debugger
+144,3,tictactoe-3.3.zip,No,70,10,60,0,4,3,2,SublimeText,gdb,Inspecting the execution by means of the debugger
+145,2,arithmetic-2.3.zip,Yes,65,65,,,2,2,3,CLion,65,Changing the execution by means of the debugger
+145,3,tictactoe-3.4.zip,No,70,5,65,0,1,3,3,CLion,LLDB,Inspecting the execution by means of the debugger
+146,2,tictactoe-2.3.zip,Yes,30,35,20,,3,2,2,CodeBlocks,gcc debugeger,Inspecting the execution by means of the debugger
+146,3,arithmetic-3.4.zip,Yes,60,50,10,,4,3,3,codeblocks,gcc debugger,Reading and understanding the source code
+147,2,tictactoe-2.2.zip,Yes,47,47,30,0,1,1,2,CLion,Bundled GDB,Inspecting the execution by means of the debugger
+147,3,arithmetic-3.4.zip,Yes,27,27,23,2,1,1,1,CLion,Bundled GDB,Inspecting the execution by means of the debugger
+148,2,arithmetic-2.4.zip,Yes,50,50,45,0,5,4,2,Codeblocks,gdb,Inspecting the execution by means of the debugger
+148,3,tictactoe-3.2.zip,Yes,15,5,10,0,1,1,2,Codeblocks,gdb,Inspecting the execution by means of the debugger
+149,2,number-2.2.zip,Yes,60,60,60,0,2,2,4,DevC++,DevC++ included,Inspecting the execution by means of the debugger
+149,3,arithmetic-3.4.zip,No,70,10,60,0,3,5,5,DevC++,DevC++ integrato,Inspecting the execution by means of the debugger
+150,2,arithmetic-2.4.zip,No,70,70,40,,4,2,3,clion,clion ,Reading and understanding the source code
+150,3,number-3.3.zip,No,70,5m,65,,2,2,2,clion,clion,Changing the execution by means of the debugger
+151,2,arithmetic-2.3.zip,No,70,30,40,,5,3,1,Codeblocks,gdb,Inspecting the execution by means of the debugger
+151,3,number-3.4.zip,No,70,30,40,,5,2,1,Codeblocks,Codeblocks debugger,Inspecting the execution by means of the debugger
+152,2,number-2.4.zip,Yes,70,15,55,0,2,4,5,CodeBlocks,GDB,Inspecting the execution by means of the debugger
+152,3,arithmetic-3.2.zip,Yes,70,30,40,0,2,3,3,Code::Blocks,GDB (integrato nell'IDE),Inspecting the execution by means of the debugger

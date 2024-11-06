@@ -1,0 +1,552 @@
+---
+title: "analysis"
+date: "2024-10-31"
+output: 
+  html_document
+#  pdf_document: 
+#    keep_tex: yes
+---
+
+```{r Setup, include=FALSE}
+library(tidyverse)
+library(scales)
+library(lmerTest)
+library(pROC)
+library(patchwork)
+library(likert)
+
+
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+options(dplyr.summarise.inform=FALSE)
+
+theme_set(theme_light()+theme(axis.title.y = element_text(hjust=1,vjust=1,angle=0),
+                              legend.position = "top"))
+```
+
+```{r load data}
+treatments = data.frame(
+TreatmentID = c(1L, 2L, 4L, 5L, 6L, 8L, 9L, 10L, 12L, 13L, 14L, 16L), 
+Application = factor(c("arithmetic", "number", "tictactoe","arithmetic", "number", "tictactoe","arithmetic", "number", "tictactoe","arithmetic", "number", "tictactoe")),
+Treatment = factor(c("vanilla","vanilla","vanilla",
+                     "opaque", "opaque", "opaque", 
+                     "split", "split", "split", 
+                     "split+opaque", "split+opaque", "split+opaque"
+                     ),
+                   levels=c("vanilla","split","opaque","split+opaque"),
+                   ordered=TRUE)
+)
+
+d.code <- read.csv("code-metrics.csv")
+
+treatments <- treatments %>% left_join(d.code,by=c("Application","Treatment")) %>% 
+          mutate(Treatment = factor(Treatment,
+                   levels=c("vanilla","split","opaque","split+opaque"),
+                   ordered=TRUE)) %>% 
+          mutate(Application = factor(Application))
+
+d <- read.csv("tasks.csv")
+
+dl <- pivot_longer(d,matches("TreatmentID\\.|SUCCEEDED\\.|TIME\\."),
+                  names_to=c(".value","Period"), names_sep="\\.")
+
+Q.home <- quantile(d$CSKILL.HOME,c(.05,.10,.9,.95),na.rm=TRUE)
+Q.lab <- quantile(d$CSKILL.LAB,c(.05,.10,.9,.95),na.rm=TRUE)
+
+dl <- dl %>% inner_join(treatments,by="TreatmentID") %>%
+             mutate(Treatment = C(Treatment,treatment)) %>%
+             mutate(Application = C(Application,treatment)) %>%
+             mutate(TIME = as.numeric(TIME)) %>%
+             mutate(Period = as.integer(Period)) %>%
+             mutate(SUCCEEDED = SUCCEEDED == "Yes") %>%
+             mutate(SUCCEEDED_40MIN = SUCCEEDED&TIME<=40 ) %>%
+             mutate(SkillH = CSKILL.HOME / 24) %>%
+             mutate(SkillL = CSKILL.LAB / 5) %>%
+             mutate(cheater = CSKILL.HOME >= Q.home["90%"] & CSKILL.LAB <= Q.lab["10%"],
+                       lazy = CSKILL.HOME <= Q.home["10%"] & CSKILL.LAB >= Q.lab["90%"]) %>%
+             mutate(KLOC.app = SLOC.app / 1000,
+                    logSLOC.app = log10(SLOC.app),
+                    KLOC.fun = SLOC.fun / 1000) %>% 
+             group_by(ID) %>% mutate(Sequence = paste(Treatment[2],Treatment[3],sep=" -> ")) %>% 
+             ungroup()
+
+dl <- dl %>% filter(Period>1)
+
+dq = read.csv("3-preliminary.csv")
+
+exp.levels = c("Never", "< 3 Months", "6 Months", "1 Year", "2 Years", "> 3 Years")
+dq <- dq %>% mutate(PROF_DEV = factor(PROF_DEV,unique(PROF_DEV)[c(1,3,2)],ordered = TRUE)) %>%
+             mutate(C_EXP = factor(C_EXP, exp.levels,ordered = TRUE)) %>%
+             mutate(C_IDE = factor(C_IDE, exp.levels,ordered = TRUE)) %>%
+             mutate(ASM_EXP = factor(ASM_EXP, exp.levels,ordered = TRUE)) %>%
+             mutate(RE_EXP = factor(RE_EXP, exp.levels,ordered = TRUE)) %>%
+             mutate( C_DEBUG_COUNT = nchar(gsub("[^,]","",gsub("^.",",",C_DEBUG)))) %>%
+             mutate(Experience = (C_DEBUG_COUNT/4 + (as.numeric(C_IDE)-1)/5*3)/4)
+dbg.options = c( "Add breakpoints", 
+                 "Execute the program stepwise", 
+                 "Inspect the call stack", 
+                 "Inspect the program variables")
+dbg.c.vars = c("C_DEBUG_BP", "C_DEBUG_STEP", "C_DEBUG_STACK", "C_DEBUG_VARS"
+)
+dbg.asm.vars = c("ASM_DEBUG_BP", "ASM_DEBUG_STEP", "ASM_DEBUG_STACK", "ASM_DEBUG_VARS"
+)
+
+names(dbg.options)<-dbg.c.vars
+dq <- cbind(dq,sapply(dbg.options,function(x) grepl(x,dq$C_DEBUG)))
+
+names(dbg.options)<-dbg.asm.vars
+dq <- cbind(dq,sapply(dbg.options,function(x) grepl(x,dq$ASM_DEBUG)))
+
+##### Post Experiment Questionnaire
+
+likert_labels <- c("Strongly agree","Partly agree","Undecided","Partly disagree","Strongly disagree")
+peq <- read_csv("4-live.csv",show_col_types = FALSE) %>%
+       mutate(TASK_CLEAR = factor(TASK_CLEAR, labels=likert_labels, ordered=TRUE)) %>% 
+       mutate(ENOUGH_TIME =  factor(ENOUGH_TIME, labels=likert_labels,ordered=TRUE)) %>% 
+       mutate(TASK_EASY =  factor(TASK_EASY, labels=likert_labels, ordered=TRUE))
+  
+
+```
+
+```{r utility function, include=FALSE}
+#' Compute Agresti-Coull interval
+#' 
+#' `agresti.coull.interval()` computes the CI for binomial
+#' distribution according to the Agrest-Coull method.
+#'
+#' @param x a numeric or a vector of numeric, the success count
+#' @param n a numeric of a vector of numeric, the total cases count
+#' @param alpha a numeric, the type I error level probability
+#'
+#' @return a named vector or matrix with names `inf` and `sup`
+#' @export
+#' @references
+#' Agresti, A. and Coull, B. A. (1998), 
+#' "Approximate is better than "exact" for interval estimation of binomial proportions", 
+#' The American Statistician, 52(2), 119-126.
+#' 
+#' @examples
+#' agresti.coull.interval(99,100)
+#' 
+agresti.coull.interval <- function(x,n,alpha=0.05){
+  if(length(x)>length(n)){
+    n = rep_len(n,length(x))
+  }
+   z = qnorm(1-alpha/2)
+   n. = n + z^2
+   p. = 1/n. * ( x + .5*z^2)
+   iw = z * sqrt(p./n. * (1-p.) )
+   if(length(x)>1){
+    return( cbind(inf=pair(0,p.-iw,max),sup=pair(1,p.+iw,min)) ) 
+   }else{
+    return( c(inf=max(0,p.-iw),sup=min(1,p.+iw)) )
+   }
+}
+
+loglink <- function(x) {
+  1 / (exp(-x)+1)
+}
+
+# $$ \frac{e^x}{1+e^x} = \frac{1}{\frac{1+e^x}{e^x}} = \frac{1}{\frac{1}{e^x}+1} = \frac{1}{e^{-x}+1}$$
+
+summarize_success <- function(d) {
+  summarize(d,SuccessRate = sum(SUCCEEDED)/length(SUCCEEDED),
+                SuccessRate.low = agresti.coull.interval(sum(SUCCEEDED),length(SUCCEEDED))["inf"], 
+                SuccessRate.high = agresti.coull.interval(sum(SUCCEEDED),length(SUCCEEDED))["sup"],
+            .groups = "drop")
+}
+```
+
+
+## Overall
+
+```{r}
+dl %>% summarize(SuccessRate = sum(SUCCEEDED)/length(SUCCEEDED), Time = mean(TIME))
+```
+
+
+## Population
+
+```{r population_skills, fig.width=12, fig.height=5}
+ch <- d %>% filter(!is.na(CSKILL.HOME)) %>% 
+  ggplot(aes(y=CSKILL.HOME))+
+  geom_bar(fill="steelblue1")+
+  scale_y_continuous(breaks=seq(1,23,2),limits=c(-0.5,23.5))+
+  ggtitle("CSKill Home")+ylab("Score")+
+  theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
+
+cl <- d %>% filter(!is.na(CSKILL.HOME))%>% 
+  ggplot(aes(y=CSKILL.LAB))+
+  geom_bar(fill="steelblue1")+
+  scale_y_continuous(breaks=seq(0,5),limits=c(-0.5,5.5))+
+  ggtitle("CSKill Live")+ylab("Score")+
+  theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
+
+ch + cl
+```
+
+
+
+## RQ1 - Success rate
+
+```{r success_rate_no_vanilla_by_treatment_application}
+dl %>% group_by(Treatment,Application) %>% summarize_success() %>%
+ggplot(aes(x=Treatment,y=SuccessRate))+
+  geom_pointrange(aes(ymin=SuccessRate.low,ymax=SuccessRate.high),col="gray40") + 
+  geom_point(color="steelblue1",size=4)+
+  geom_text(aes(label=percent(SuccessRate)),vjust=-2,size=2.5,color="grey30")+
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  ylab("Success Rate") + 
+  coord_flip() +
+  facet_grid(Application~.)
+```
+
+
+```{r success rate logistic regression within subjects}
+mdl.within.nv <- glmer(SUCCEEDED ~ Treatment + Application + Period + Sequence + (1|ID), 
+                       data=dl %>% mutate(Treatment=C(droplevels(Treatment),treatment),
+                                          Period=Period-2),
+                       family=binomial(link="logit"))
+summary(mdl.within.nv)
+
+# knitr::kable(summary(mdl.within.nv)$coefficients,format = "latex",digits = 3)
+```
+
+Conclusion:
+
+```{r}
+1/loglink(-1.6851)
+
+1/exp(-1.7)
+```
+
+### Check with between subjects model and with sampling
+
+```{r success rate logistic regression between subjects}
+mdl.between.nv <- glm(SUCCEEDED ~ Treatment + Application + Period + Sequence, 
+                       data=dl %>% mutate(Treatment=C(droplevels(Treatment),treatment),
+                                          Period=Period-2),
+                       family=binomial(link="logit"))
+summary(mdl.between.nv)
+```
+
+```{r success rate logistic regression between subjects sample}
+mdl.between.nv.s <- glm(SUCCEEDED ~ Treatment + Application + Period + Sequence, 
+                       data=dl %>% mutate(Treatment=C(droplevels(Treatment),treatment),
+                                          Period=Period-2) %>% 
+                            group_by(Treatment) %>% 
+                            filter(1:n() %in% sample(n(),75))
+                      ,
+                       family=binomial(link="logit"))
+summary(mdl.between.nv.s)
+```
+
+
+## RQ2
+
+```{r attack_time_by_Treatment_Application_no-vanilla}
+dl %>% filter(SUCCEEDED) %>%
+  ggplot(aes(x=Treatment,y=TIME))+
+  geom_boxplot(fill="steelblue1") +
+  stat_summary(fun="mean", geom="point", shape="+",size=5) +
+  coord_flip()+
+  facet_grid(Application~.)
+```
+
+```{r test task time by Treatment }
+
+mdlt.within <- lmer(TIME ~ Treatment + Application + Period + Sequence + (1|ID), REML=FALSE,
+                       data=dl %>% filter(SUCCEEDED,Period>1) %>%
+                            mutate(Treatment=C(droplevels(Treatment),treatment),Period=Period-2))
+
+summary(mdlt.within)
+
+# knitr::kable(summary(mdlt.within)$coefficients,format = "latex",digits = 3)
+
+```
+
+
+## RQ3 Code size and Success rate
+
+```{r success_rate_by_size,fig.width=10, fig.height=4}
+
+smdl.loc = glm(SUCCEEDED ~ KLOC.app,data=dl,family=binomial(link="logit"))
+summary(smdl.loc)
+
+dl %>% group_by(KLOC.app,Application) %>% summarize_success() %>%
+ggplot(aes(x=KLOC.app,y=SuccessRate,color=Application))+
+  geom_pointrange(aes(ymin=SuccessRate.low,ymax=SuccessRate.high),col="gray40") + 
+  geom_point(size=4)+
+  scale_color_brewer(type="qual",palette=6)+
+  geom_text(aes(label=percent(SuccessRate,accuracy=1)),size=1.5,color="grey30")+
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  xlab("Code size [KLOC]")+ylab("Success Rate")#+
+  #geom_line(color="firebrick",linetype=2,
+  #          data=data.frame(KLOC.app=25:105/100,Application=NA,
+  #                    SuccessRate=predict(smdl.loc,data.frame(KLOC.app=25:105/100),type="response")))
+
+```
+
+```{r test task correctness by SLOC no-vanilla }
+mdl.within.nv.loc <- glmer(SUCCEEDED ~ KLOC.app + Period + Sequence + (1|ID),
+                       data=dl %>% mutate(Period=Period-2),
+                       family=binomial(link="logit"))
+
+summary(mdl.within.nv.loc)
+```
+
+```{r success_model_ROC,fig.width=6,fig.height=4}
+# https://www.rdocumentation.org/packages/pROC/versions/1.18.0
+build_roc <- function(.mdl){
+  response = getData(.mdl)[[formula(.mdl)[[2]]]]
+  predictor = predict(.mdl,type="response")
+  pROC::roc(response,predictor)
+}
+roc.mdl.ta <- build_roc(mdl.within.nv)
+roc.mdl.loc <- build_roc(mdl.within.nv.loc)
+
+
+pROC::ggroc(list("Treatment+Application"=roc.mdl.ta,"CodeSize"=roc.mdl.loc), legacy.axes=TRUE)+
+  scale_color_brewer(name="",type="qual",palette=6,guide="none")+
+  scale_x_continuous(labels=percent,expand = expansion(add=0.01))+
+  scale_y_continuous(labels=percent,expand = expansion(add=0.01))+
+  annotate("text",x=.37,y=1,label="Treatment+Application",
+           hjust=1,vjust=1,size=3,color="red")+
+  annotate("text",x=.5,y=0.87,label="Code size",
+           hjust=0,vjust=1,size=3,color="steelblue")+
+  annotate("text",x=.5,y=.5,label="Random model",col="gray50",
+           vjust=2,angle=31,size=3)+
+  geom_abline(slope=1,col="gray50",linetype=2)+
+  theme_minimal()+theme(legend.position = "bottom")
+
+
+pROC::roc.test(roc.mdl.ta,roc.mdl.loc)
+
+```
+
+## RQ4 Code size and Time
+
+```{r attack_time_by_size,fig.width=10,fig.height=4}
+dl %>% filter(SUCCEEDED) %>%
+  ggplot(aes(x=KLOC.app,y=TIME,fill=Application,color=Application,group=as.factor(KLOC.app)))+
+  geom_boxplot(alpha=0.6) +
+  stat_summary(fun="mean", geom="point", shape="+",size=5,color="gray40") +
+  scale_fill_brewer(type="qual",palette=6)+
+  scale_color_brewer(type="qual",palette=6)+
+  xlab("Code size [KLOC]")+ylab("Time")
+```
+
+
+```{r test task time by SLOC no-vanilla }
+
+mdlt.within.loc <- lmer(TIME ~ KLOC.app + Period + Sequence + (1|ID), REML=FALSE,
+                       data=dl %>% filter(SUCCEEDED) %>%
+                            mutate(Period=Period-2))
+
+summary(mdlt.within.loc)
+
+```
+
+
+```{r model time comparison}
+AIC(mdlt.within,mdlt.within.loc)
+BIC(mdlt.within,mdlt.within.loc)
+
+```
+
+## Cofactors - Skill
+
+### Success Rate 
+
+```{r skillh_success_rate, fig.width=5, fig.height=3}
+mdl.cof.skillh = glm(SUCCEEDED ~ CSKILL.HOME, data=dl,family="binomial")
+summary(mdl.cof.skillh)
+
+dl %>% group_by(CSKILL.HOME) %>% summarize_success() %>%
+ggplot(aes(x=CSKILL.HOME,y=SuccessRate))+
+  geom_pointrange(aes(ymin=SuccessRate.low,ymax=SuccessRate.high),col="gray40") + 
+  geom_point(color="steelblue1",size=4)+
+  scale_y_continuous(labels = percent,name="Success")+
+  geom_line(color="firebrick",linetype=2,
+            data=data.frame(CSKILL.HOME=0:23,
+                      SuccessRate=predict(mdl.cof.skillh,data.frame(CSKILL.HOME=0:23),type="response")))+
+  xlab("C Skill home")
+```
+
+```{r skillh_success_rate_detailed}
+mdl.cof <- glm(SUCCEEDED ~ SkillH + Treatment + Application, 
+                       data=dl %>% mutate(Treatment=C(droplevels(Treatment),treatment)),
+                       family=binomial(link="logit"))
+
+summary(mdl.cof)
+
+predict_df = complete(data.frame(SkillH=0:26/26,Treatment=unique(droplevels(dl$Treatment)),Application=unique(dl$Application)),SkillH,Treatment,Application)
+ggplot(dl%>%mutate(Success=as.numeric(SUCCEEDED)),
+       aes(x=SkillH,y=Success))+
+  geom_point() +
+  scale_y_continuous(labels = percent,name="Success")+
+  facet_grid(Treatment~Application)+
+  geom_line(data=data.frame(predict_df,
+                      Success=predict(mdl.cof,predict_df,type="response")))
+```
+
+```{r skilll_success_rate, fig.width=5, fig.height=3}
+mdl.cof.skilll = glm(SUCCEEDED ~ CSKILL.LAB, data=dl,family="binomial")
+summary(mdl.cof.skilll)
+
+dl %>% group_by(CSKILL.LAB) %>% summarize_success() %>%
+ggplot(aes(x=CSKILL.LAB,y=SuccessRate))+
+  geom_pointrange(aes(ymin=SuccessRate.low,ymax=SuccessRate.high),col="gray40") + 
+  geom_point(color="steelblue1",size=4)+
+  scale_y_continuous(labels = percent,name="Success")+
+  geom_line(color="firebrick",linetype=2,
+            data=data.frame(CSKILL.LAB=0:25/5,
+                      SuccessRate=predict(mdl.cof.skilll,data.frame(CSKILL.LAB=0:25/5),type="response")))+
+  xlab("C Skill live")
+```
+
+### Time
+
+```{r skillh_time, fig.width=5, fig.height=3}
+mdlt.cof.skillh = lm(TIME ~ CSKILL.HOME, data=dl)
+summary(mdlt.cof.skillh)
+
+dl %>% mutate(CSKILL.HOME=factor(CSKILL.HOME,levels=0:23)) %>%
+ggplot(aes(x=CSKILL.HOME,y=TIME))+
+  geom_boxplot(fill="steelblue1") + 
+  scale_y_continuous(name="Time") +
+  scale_x_discrete(breaks=0:23,limits=as.character(0:23))+
+  geom_line(aes(group=1),color="firebrick",linetype=2,
+            data=data.frame(CSKILL.HOME=factor(as.character(0:23)),
+                      TIME=predict(mdlt.cof.skillh,data.frame(CSKILL.HOME=0:23),type="response")))+
+  xlab("C Skill home")
+```
+
+```{r skilll_time, fig.width=5, fig.height=3}
+mdlt.cof.skilll = lm(TIME ~ CSKILL.LAB, data=dl)
+summary(mdlt.cof.skilll)
+
+dl %>% mutate(CSKILL.LAB=factor(CSKILL.LAB,levels=0:5)) %>%
+ggplot(aes(x=CSKILL.LAB,y=TIME))+
+  geom_boxplot(fill="steelblue1") + 
+  scale_y_continuous(name="Time") +
+  scale_x_discrete(breaks=0:5,limits=as.character(0:5))+
+  geom_line(aes(group=1),color="firebrick",linetype=2,
+            data=data.frame(CSKILL.LAB=factor(as.character(0:5)),
+                      TIME=predict(mdlt.cof.skilll,data.frame(CSKILL.LAB=0:5),type="response")))+
+  xlab("C Skill home")
+```
+
+
+## Model comparison
+
+```{r success_model_ROC_all,fig.width=6,fig.height=4}
+# https://www.rdocumentation.org/packages/pROC/versions/1.18.0
+
+getData.glm <- function(x){
+  x$data
+}
+build_roc <- function(.mdl){
+  response = getData(.mdl)[[formula(.mdl)[[2]]]]
+  predictor = predict(.mdl,type="response")
+  pROC::roc(response,predictor)
+}
+
+mdl.skilll = glm(SUCCEEDED ~ CSKILL.LAB + Treatment + Application + Period + Sequence, data=dl,family="binomial")
+mdl.skillh = glm(SUCCEEDED ~ CSKILL.HOME + Treatment + Application + Period + Sequence, data=dl,family="binomial")
+
+roc.mdl.ta <- build_roc(mdl.within.nv)
+roc.mdl.loc <- build_roc(mdl.within.nv.loc)
+roc.mdl.cskilll <- build_roc(mdl.skilll)
+roc.mdl.cskillh <- build_roc(mdl.skillh)
+
+
+pROC::ggroc(list("Treatment+Application"=roc.mdl.ta,"CodeSize"=roc.mdl.loc, "CSkillLive"=roc.mdl.cskilll, "CSkillHome"=roc.mdl.cskillh), legacy.axes=TRUE)+
+  scale_color_brewer(name="",type="qual",palette=6,guide="none")+
+  scale_x_continuous(labels=percent,expand = expansion(add=0.01))+
+  scale_y_continuous(labels=percent,expand = expansion(add=0.01))+
+  annotate("text",x=.37,y=1,label="Treatment+Application",
+           hjust=1,vjust=1,size=3,color="red")+
+  annotate("text",x=.4,y=0.88,label="Code size",
+           hjust=0,vjust=1,size=3,color="steelblue")+
+  annotate("text",x=.25,y=0.5,label="C Skill\nLive",
+           hjust=0,vjust=1,size=3,color="olivedrab4")+
+  annotate("text",x=.13,y=0.55,label="C Skill\nHome",
+           hjust=0,vjust=1,size=3,color="purple3")+
+  annotate("text",x=.5,y=.5,label="Random model",col="gray50",
+           vjust=2,angle=33,size=3)+
+  geom_abline(slope=1,col="gray50",linetype=2)+
+  theme_minimal()+theme(legend.position = "bottom")
+
+
+pROC::roc.test(roc.mdl.ta,roc.mdl.loc)
+
+pROC::roc.test(roc.mdl.ta,roc.mdl.cskilll)
+pROC::roc.test(roc.mdl.ta,roc.mdl.cskillh)
+
+```
+
+
+```{r model_time_comparison_all}
+
+mdlt.skillh = lm(TIME ~ CSKILL.HOME + Treatment + Application + Period + Sequence, data=dl)
+mdlt.skilll = lm(TIME ~ CSKILL.LAB + Treatment + Application + Period + Sequence, data=dl)
+
+
+AIC(mdlt.within,mdlt.within.loc,mdlt.skillh,mdlt.skilll)
+BIC(mdlt.within,mdlt.within.loc,mdlt.skillh,mdlt.skilll)
+
+```
+
+
+## Post Experiment Questionnaire
+
+```{r post_quest, fig.width=8, fig.height=3}
+peq_summary <-
+peq %>% select(TASK_CLEAR,ENOUGH_TIME,TASK_EASY) %>% 
+        pivot_longer(c("TASK_CLEAR","TASK_EASY","ENOUGH_TIME"), names_to = "Item", values_to = "response") %>% 
+        count(Item,response) %>% group_by(Item) %>% mutate( n = 100*n/sum(n)) %>% 
+        # mutate(Item=as_factor(Item), n=as.numeric(n)) %>% 
+        pivot_wider(names_from="response", values_from = "n") %>% select(1,6:2)
+peq_summary
+peq_summary %>% data.frame() %>% likert(summary=.) %>% plot(low.color="firebrick",high.color="steelblue")
+
+```
+
+
+## Distances
+
+```{r process_distances, fig.width=8, fig.height=3}
+distances <- read.csv("process/ff_data.csv") %>% mutate(dist="FF") %>% 
+             rbind(read.csv("process/sf_data.csv") %>% mutate(dist="SF")) %>% 
+             rbind(read.csv("process/ss_data.csv") %>% mutate(dist="SS"))
+
+distances %>% 
+ggplot(aes(y=dist,x=distance))+
+  geom_boxplot(fill="steelblue1")+
+  stat_summary(fun="mean", geom="point", shape="+",size=5,color="gray40")
+
+#summary(lm(distance~dist, data=distances))
+
+#           & ttt (S) & num (S) & arith (S) & ttt (F) & num (F) & arith (F) \\
+# \midrule
+# ttt (S)   &  -      & 0.96    & 0.97      & 1.29    & 1.37    & 1.43      \\
+# num (S)   &         & -       & 0.87      & 1.06    & 1.12    & 1.35      \\
+# arith (S) &         &         & -         & 1.21    & 1.31    & 1.47      \\
+# ttt (F)   &         &         &           & -       & 1.02    & 1.07      \\
+# num (F)   &         &         &           &         & -       & 1.1       \\
+# arith (F) &         &         &           &         &         & -        \\
+
+distances = data.frame(
+  proc1 = c("ttt(S)","ttt(S)"  ,"ttt(S)","ttt(S)","ttt(S)"  ,"num(S)"  ,"num(S)","num(S)","num(S)"  ,"arith(S)","arith(S)","arith(S)","ttt(F)","ttt(F)",  "num(F)"),
+  proc2 = c("num(S)","arith(S)","ttt(F)","num(F)","arith(F)","arith(S)","ttt(F)","num(F)","arith(F)","ttt(F)"  ,"num(F)"  ,"arith(F)","num(F)","arith(F)","arith(F)"),
+  distance = c(0.96 , 0.97  , 1.29, 1.37, 1.43, 0.87, 1.06, 1.12, 1.3, 1.21, 1.31, 1.47,1.02, 1.07, 1.1 )
+)
+
+distances %>% mutate(type = paste0( str_match(proc1,"\\((.)\\)")[,2], str_match(proc2,"\\((.)\\)")[,2]) ) %>% 
+ggplot(aes(y=type,x=distance))+
+  geom_boxplot(fill="steelblue1")+
+    stat_summary(fun="mean", geom="point", shape="+",size=5,color="gray40")
+
+
+```
+

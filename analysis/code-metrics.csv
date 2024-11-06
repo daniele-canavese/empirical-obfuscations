@@ -1,0 +1,13 @@
+Application,SLOC.app,decision_points.app,assignments.app,CC.app,SLOC.fun,decision_points.fun,assignments.fun,CC.fun,Treatment
+arithmetic,216,33,86,40,97,20,35,21,vanilla
+arithmetic,423,96,168,103,304,83,117,84,opaque
+arithmetic,354,73,145,80,235,60,94,61,split
+arithmetic,1021,261,415,268,902,248,364,249,split+opaque
+number,272,52,99,57,46,9,17,10,vanilla
+number,371,78,135,83,145,35,53,36,opaque
+number,347,70,127,75,121,27,45,28,split
+number,629,148,241,153,403,105,159,106,split+opaque
+tictactoe,162,27,53,33,44,14,15,15,vanilla
+tictactoe,259,56,92,62,141,43,54,44,opaque
+tictactoe,255,54,91,60,137,41,53,42,split
+tictactoe,586,144,220,150,468,131,182,132,split+opaque
