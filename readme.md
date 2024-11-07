@@ -8,19 +8,18 @@
 &nbsp;
 [![mark](https://img.shields.io/badge/Marco-Torchiano-E4405F?logo=linkedin)](https://www.linkedin.com/in/marco-torchiano-b263005/)
 
-
 This repository contains the questionnaires, their results, and our analysis on
 an experiment we did to empirically prove that software obfuscations slow down
 the reverse engineering of attackers.
 
 We distributed the C source code of different applications obfuscated
 with [Tigress](https://tigress.wtf/) (using control flow flattening and opaque
-predicates) to 152 computer engineering students of the last year at
-the [Politecnico di Torino](https://www.polito.it/), one of the most renowned
-technical universities in Italy. In each of these applications we injected a
-simple but prominent bug and asked the students to fix during a hackathon of
-sort. We timed the students and asked them to fill several questionnaires
-describing their experience.
+predicates) to 152 students in the second year of the MSc in Computer
+Engineering at the [Politecnico di Torino](https://www.polito.it/), one of the
+most renowned technical universities in Italy. In each of these applications we
+injected a simple but prominent bug and asked the students to fix during a
+hackathon of sort. We timed the students and asked them to fill several
+questionnaires describing their experience.
 
 Our full discussion about the experiment procedure and its results analysis can
 be found in our paper *Empirical Assessment of the Effort Needed to Attack
